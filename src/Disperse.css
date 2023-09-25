@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+  
+
+/* Disperse.css */
+
+
+.disperse-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #24272c;
+    color: white;
+    padding: 20px;
+  }
+  
+  .header-section {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    }
+    p{
+        font-size: 18px;
+        padding-left: 90px;
+        padding-right: 90px;
+    }
+  
+  .editor-container {
+    display: flex;
+    flex-direction: row; /* Display line numbers and editor side by side */
+    align-items: flex-start; /* Align items to the top */
+    background-color: #0f121a; /* Change to the desired background color */
+    border-radius: 10px;
+    padding: 40px 0;
+    width: 90%; /* Reduce the width to your desired percentage */
+  }
+  
+  .line-numbers {
+    padding: 10px 0;
+    color: white;
+    text-align: right;
+    user-select: none;
+    width: 30px;
+  }
+  
+  .line-number {
+    padding: 2px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .input-editor {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: white;
+    resize: none;
+    font-size: 16px;
+    line-height: 1.4em;
+    flex: 1;
+    border-left: 2px solid #fff;
+    outline: none;
+  }
+  
+  .error-box {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 16px;
+    margin: 5px 0;
+    padding: 5px;  
+    text-align: center;
+  }
+  
+  .button-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin-top: 30px; /* Add top margin */
+    margin-bottom: 30px; /* Add bottom margin */
+  }
+  
+  .gradient-button {
+    background: linear-gradient(to right, #c072fb, #6b55d1);
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 25px 0;
+    flex: 1; /* Allow the button to expand */
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 10px; /* Add left margin */
+    margin-right: 10px; /* Add right margin */
+  }
+  
+  .gradient-button:hover {
+    background: linear-gradient(to right, #6b55d1, #c072fb);
+  }
+ 
+  .keep-the-first-one-button{
+    background: none;
+    border: none;
+    color: red; /* Inherits the text color from its parent */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    padding: 0; /* Remove any padding */
+    font-size: 17px;
+    margin-bottom: 20px;
+
+  }
+  
+  
+  
