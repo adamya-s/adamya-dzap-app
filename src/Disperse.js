@@ -40,7 +40,7 @@ const Disperse = () => {
           newErrors.push(`Line ${i + 1}: Invalid Ethereum address format.`);
         }
         if (isNaN(amount) || parseFloat(amount) < 0) {
-          newErrors.push(`Line ${i + 1}: Invalid amount. Please enter a non-negative number.`);
+          newErrors.push(`Line ${i + 1}: Invalid amount. Please enter a valid amount.`);
         }
 
         // Check for duplicate addresses
