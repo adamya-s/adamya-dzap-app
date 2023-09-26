@@ -62,32 +62,32 @@ const Disperse = () => {
   };
 
   const handleRemoveDuplicates = () => {
-    const updatedEntries = [];
-    const remainingErrors = [...errors];
-    const linesWithErrors = new Set();
-    const linesWithNoErrors = [];
-
-    for (const [address, lines] of duplicateErrors) {
-      linesWithErrors.add(...lines);
-    }
-
-    for (let i = 0; i < inputData.split('\n').length; i++) {
-      const line = inputData.split('\n')[i];
-      const [address] = line.split(/[\s=,]+/).filter(Boolean);
-
-      if (!linesWithErrors.has(i + 1)) {
-        linesWithNoErrors.push(line);
+    const lines = inputData.split('\n');
+    const updatedLines = [];
+    const seenDuplicates = new Set();
+  
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const [address, amount] = line.split(/[\s=,]+/).filter(Boolean);
+  
+      if (address && amount) {
+        const addressAmountKey = `${address}=${amount}`;
+  
+        if (!seenDuplicates.has(addressAmountKey)) {
+          updatedLines.push(line);
+          seenDuplicates.add(addressAmountKey);
+        }
+      } else {
+        updatedLines.push(line);
       }
     }
-
-    // Update the input data with lines that have no errors and the first occurrence of each duplicate address
-    const updatedData = linesWithNoErrors.concat(updatedEntries).join('\n');
+  
+    const updatedData = updatedLines.join('\n');
     setInputData(updatedData);
     validateInput(updatedData);
-
-    // Clear duplicate errors
     setDuplicateErrors(new Map());
   };
+  
 
   const handleSubmit = () => {
     validateInput(inputData);
@@ -120,15 +120,14 @@ const Disperse = () => {
         <p style={{ color: 'grey' }}>Show Example</p>
       </div>
       {[...duplicateErrors.keys()].length > 0 && (
-          <div>
-            <button
-              className="keep-the-first-one-button"
-              onClick={handleRemoveDuplicates}
-            >
-              Keep the First One
-            </button>
-          </div>
-        
+        <div>
+          <button
+            className="keep-the-first-one-button"
+            onClick={handleRemoveDuplicates}
+          >
+            Keep the First One
+          </button>
+        </div>
       )}
       {(errors.length > 0 || [...duplicateErrors.keys()].length > 0) && (
         <div className="error-box">
@@ -144,7 +143,6 @@ const Disperse = () => {
           ))}
         </div>
       )}
-      
       <div className="button-section">
         <button
           className="gradient-button"
