@@ -65,7 +65,7 @@ body {
     color: white;
     resize: none;
     font-size: 16px;
-    line-height: 1.4em;
+    /* line-height: 1.4em; */
     flex: 1;
     border-left: 2px solid #fff;
     outline: none;
