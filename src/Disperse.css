@@ -36,7 +36,7 @@ body {
     display: flex;
     flex-direction: row; /* Display line numbers and editor side by side */
     align-items: flex-start; /* Align items to the top */
-    background-color: #0f121a; /* Change to the desired background color */
+    background-color: #0f121a; 
     border-radius: 10px;
     padding: 40px 0;
     width: 90%; /* Reduce the width to your desired percentage */
@@ -94,8 +94,8 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 95%;
-    margin-top: 30px; /* Add top margin */
-    margin-bottom: 30px; /* Add bottom margin */
+    margin-top: 30px; /* top margin */
+    margin-bottom: 30px; /* bottom margin */
   }
   
   .gradient-button {
@@ -104,11 +104,11 @@ body {
     font-size: 18px;
     border: none;
     padding: 25px 0;
-    flex: 1; /* Allow the button to expand */
+    flex: 1; 
     border-radius: 50px;
     cursor: pointer;
-    margin-left: 10px; /* Add left margin */
-    margin-right: 10px; /* Add right margin */
+    margin-left: 10px; 
+    margin-right: 10px; 
   }
   
   .gradient-button:hover {
