@@ -115,15 +115,26 @@ body {
     background: linear-gradient(to right, #6b55d1, #c072fb);
   }
  
-  .keep-the-first-one-button{
+  .keep-the-first-one-button {
     background: none;
     border: none;
-    color: red; /* Inherits the text color from its parent */
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-    padding: 0; /* Remove any padding */
+    color: red;
+    cursor: pointer; 
+    padding: 10px 20px;
     font-size: 17px;
     margin-bottom: 20px;
-
+  }
+  
+  .custom-button {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .custom-button span { 
+    font-size: 20px;
+    margin: 0 90  px;
+    padding-bottom: 25px;
   }
   
   

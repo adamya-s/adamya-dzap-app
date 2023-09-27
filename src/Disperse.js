@@ -44,13 +44,14 @@ const Disperse = () => {
         }
 
         // Check for duplicate addresses
-        if (newSeenAddresses.has(address)) {
-          if (!newDuplicateErrors.has(address)) {
-            newDuplicateErrors.set(address, [newSeenAddresses.get(address)]);
+        const addressLower = address.toLowerCase();
+        if (newSeenAddresses.has(addressLower)) {
+          if (!newDuplicateErrors.has(addressLower)) {
+            newDuplicateErrors.set(addressLower, [newSeenAddresses.get(addressLower)]);
           }
-          newDuplicateErrors.get(address).push(i + 1);
+          newDuplicateErrors.get(addressLower).push(i + 1);
         } else {
-          newSeenAddresses.set(address, i + 1);
+          newSeenAddresses.set(addressLower, i + 1);
         }
       } else {
         newErrors.push(`Line ${i + 1}: Ethereum address and amount must be specified.`);
@@ -62,17 +63,16 @@ const Disperse = () => {
   };
 
   const handleRemoveDuplicates = () => {
-    const lines = inputData.split('\n');
+    const lines = inputData.split(/\n/);
     const updatedLines = [];
     const seenDuplicates = new Set();
-  
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const [address, amount] = line.split(/[\s=,]+/).filter(Boolean);
-  
+
       if (address && amount) {
-        const addressAmountKey = `${address}=${amount}`;
-  
+        const addressAmountKey = `${address.toLowerCase()}=${amount}`;
         if (!seenDuplicates.has(addressAmountKey)) {
           updatedLines.push(line);
           seenDuplicates.add(addressAmountKey);
@@ -81,13 +81,50 @@ const Disperse = () => {
         updatedLines.push(line);
       }
     }
-  
+
     const updatedData = updatedLines.join('\n');
     setInputData(updatedData);
     validateInput(updatedData);
     setDuplicateErrors(new Map());
   };
-  
+
+  const handleCombineBalance = () => {
+    const lines = inputData.split(/\n/);
+    const balances = new Map();
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const [address, amount] = line.split(/[\s=,]+/).filter(Boolean);
+
+      if (address && amount) {
+        const addressLower = address.toLowerCase();
+        if (balances.has(addressLower)) {
+          balances.set(addressLower, balances.get(addressLower) + parseFloat(amount));
+        } else {
+          balances.set(addressLower, parseFloat(amount));
+        }
+      }
+    }
+
+    const combinedLines = [];
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const [address, amount] = line.split(/[\s=,]+/).filter(Boolean);
+
+      if (address && amount) {
+        const addressLower = address.toLowerCase();
+        if (balances.has(addressLower)) {
+          combinedLines.push(`${address}=${balances.get(addressLower)}`);
+          balances.delete(addressLower);
+        }
+      }
+    }
+
+    const updatedData = combinedLines.join('\n');
+    setInputData(updatedData);
+    validateInput(updatedData);
+    setDuplicateErrors(new Map());
+  };
 
   const handleSubmit = () => {
     validateInput(inputData);
@@ -120,12 +157,20 @@ const Disperse = () => {
         <p style={{ color: 'grey' }}>Show Example</p>
       </div>
       {[...duplicateErrors.keys()].length > 0 && (
-        <div>
+        <div className='custom-button'>
           <button
             className="keep-the-first-one-button"
             onClick={handleRemoveDuplicates}
           >
             Keep the First One
+          </button>
+          <span>|</span>
+          
+          <button
+            className="keep-the-first-one-button"
+            onClick={handleCombineBalance}
+          >
+            Combine Balance
           </button>
         </div>
       )}
